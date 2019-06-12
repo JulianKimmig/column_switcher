@@ -15,8 +15,8 @@
 {% endblock %}
 
 {% block javascript %}
-    <script src="{% static 'websocket_server/sodium.js'%}" async></script>
-    <script src="{% static 'websocket_server/websocket_server.js'%}"></script>
+    <script src="{% static 'django_websocket_server/sodium.js'%}" async></script>
+    <script src="{% static 'django_websocket_server/django_websocket_server.js'%}"></script>
     <script src="{% static 'column_switcher/column_switcher.js'%}"></script>
     <script>
         wscs.RECONNECT_TIME = 500;

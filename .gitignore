@@ -225,3 +225,6 @@ local.properties
 .scala_dependencies
 .worksheet
 
+/.idea/
+/upload_to_pypi.py
+/column_switcher.iml

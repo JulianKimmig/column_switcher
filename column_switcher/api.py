@@ -2,9 +2,9 @@ import json
 import threading
 import time
 
-from arduino_controller.api import ArduinoControllerAPI
+from django_websocket_server.messagetemplates import commandmessage
+from multi_purpose_arduino_controller.arduino_controller.api import ArduinoControllerAPI
 from boards.servocontroller.board import ServoController
-from serverapps.websocket.messagetemplates import commandmessage
 
 MOTORFIRMWARE = ServoController.FIRMWARE
 

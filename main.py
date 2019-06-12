@@ -21,13 +21,14 @@ from os.path import expanduser
 import coloredlogs
 from json_dict import JsonDict
 
-from arduino_controller.parseboards import parse_path_for_boards
-from arduino_controller.serialreader import serialreader
-from controll_server.board_controller.board_controller_api import BoardControllerAPI
+from django_websocket_server import websocket_server
+
+from multi_purpose_arduino_controller.arduino_controller.parseboards import parse_path_for_boards
+from multi_purpose_arduino_controller.arduino_controller.serialreader import serialreader
+from multi_purpose_arduino_controller.controll_server.board_controller.board_controller_api import BoardControllerAPI
 from column_switcher.api import ColumnSwitcherAPI
 from python_communicator import PythonCommunicator
-from serverapps import websocket
-from serverapps.websocket import websocket_server
+
 
 BASENAME = "Column Switcher"
 SNAKE_NAME = BASENAME.lower().replace(' ', '_')
@@ -65,7 +66,7 @@ def main():
     logger.info("Use basedir: "+ os.path.abspath(BASE_DIR))
 
     # set server logger.
-    from controll_server import manage as controll_server_manage
+    from multi_purpose_arduino_controller.controll_server import manage as controll_server_manage
     #controll_server_manage.logger = logger
 
     #set_server_config
@@ -78,9 +79,9 @@ def main():
     else:
         controll_server_manage.CONFIG.put("django_settings","debug",value=False)
 
-    apps = ["serverapps.accounts",
-            "controll_server.board_controller",
-            "serverapps.websocket",
+    apps = ["django_accounts",
+            "multi_purpose_arduino_controller.controll_server.board_controller",
+            "django_websocket_server",
             "column_switcher.django_app"
             ]
     #apps.append("serverapps.board_creator")
@@ -119,7 +120,7 @@ def main():
 
 
     #parse for boards
-    parse_path_for_boards("C:\\Users\\be34gof\\Syn\\programming\\work\\digitalization\\boards")
+    parse_path_for_boards(os.path.join(os.path.dirname(__file__),"boards"))
 
 
     board_controller_api = BoardControllerAPI(python_communicator=python_communicator,websocket_server=socketserver_instance,data_dir=os.path.join(BASE_DIR,"BoardControllerAPI"))
