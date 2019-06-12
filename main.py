@@ -27,8 +27,7 @@ from multi_purpose_arduino_controller.arduino_controller.parseboards import pars
 from multi_purpose_arduino_controller.arduino_controller.serialreader import serialreader
 from multi_purpose_arduino_controller.controll_server.board_controller.board_controller_api import BoardControllerAPI
 from column_switcher.api import ColumnSwitcherAPI
-from python_communicator import PythonCommunicator
-
+from multi_purpose_arduino_controller.python_communicator import PythonCommunicator
 
 BASENAME = "Column Switcher"
 SNAKE_NAME = BASENAME.lower().replace(' ', '_')
