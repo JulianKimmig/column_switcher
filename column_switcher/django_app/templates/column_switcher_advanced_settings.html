@@ -1,0 +1,28 @@
+{% extends 'basic.html' %}
+{% load static %}
+{% block contend %}
+    Column Switcher Advanced Settings
+    <div id='portcontroller'></div>
+{% endblock %}
+
+{% block javascript %}
+    <script src="{% static 'websocket_communication_server.js'%}"></script>
+    <script src="{% static 'socketserver_data.js'%}"></script>
+    <script src="{% static 'js/portcontroller.js'%}"></script>
+    <script>
+        set_port_controller_div('portcontroller');
+
+
+        wscs.add_on_indentify_function(function () {
+            wscs.send(wscs.commandmessage('get_motor_ports', "gui", "server", true, [], {data_target:"gui"}));
+        });
+
+
+        function set_motor_ports(data){
+            console.log(data)
+        }
+
+        wscs.add_cmd_funcion("set_motor_ports",set_motor_ports())
+
+    </script>
+{% endblock %}

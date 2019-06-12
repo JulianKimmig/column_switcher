@@ -1,0 +1,10 @@
+
+<li class="dropdown-item dropdown-submenu">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ app.verbose_name }}
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+        <a class="dropdown-item" href="{% url 'column_switcher:index'%}">index</a>
+        <a class="dropdown-item" href="{% url 'column_switcher:advanced' %}">advanced settings</a>
+    </div>
+</li>

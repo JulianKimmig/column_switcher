@@ -1,0 +1,24 @@
+{% extends 'basic.html' %}
+{% load static %}
+{% block contend %}
+    Column Switcher
+    <div id="motor_div"></div>
+    <div id="programming">
+        <div><table id="program_table"></table></div>
+        <div><button id="program_stop_button" class="btn btn-danger">stop</button></div>
+        <div><button id="program_run_button" class="btn btn-success">run</button></div>
+    <div>
+        <textarea id="raw_program_input" cols="30" rows="10"></textarea></br>
+        <button id="raw_program_input_validate" class="btn btn-primary">validate</button>
+    </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script src="{% static 'websocket_server/sodium.js'%}" async></script>
+    <script src="{% static 'websocket_server/websocket_server.js'%}"></script>
+    <script src="{% static 'column_switcher/column_switcher.js'%}"></script>
+    <script>
+        wscs.RECONNECT_TIME = 500;
+    </script>
+{% endblock %}
