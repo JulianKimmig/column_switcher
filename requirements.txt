@@ -2,3 +2,4 @@ Multi-Purpose-Arduino-Controller
 Django-Websocket-Server
 coloredlogs
 Json-Dict
+custom-accounts-django
