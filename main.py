@@ -132,7 +132,7 @@ def main():
 
 
     #starts django
-    controll_server_manage.run(sys.argv[0],"runserver","--noreload")
+    controll_server_manage.run(sys.argv[0],"runserver","--noreload","0.0.0.0:"+str(config.get("controll_server","django_settings","port",default=8000)))
 
 
 
