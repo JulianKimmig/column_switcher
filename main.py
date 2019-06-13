@@ -115,7 +115,7 @@ def main():
     python_communicator = PythonCommunicator()
 
     #websocket server
-    socketserver_instance = websocket_server.connect_to_first_free_port(data_dir=BASE_DIR,logger=logging.getLogger("websocket_server"),start_in_background=True,disable_encryption = config.get("websocket","security","disable_encryption",default=False))
+    socketserver_instance = websocket_server.connect_to_first_free_port(data_dir=BASE_DIR,logger=logging.getLogger("websocket_server"),start_in_background=True,startport=config.get("websocket","startport",default=9001),disable_encryption = config.get("websocket","security","disable_encryption",default=False))
 
 
     #parse for boards
