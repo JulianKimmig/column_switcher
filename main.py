@@ -78,7 +78,7 @@ def main():
     else:
         controll_server_manage.CONFIG.put("django_settings","debug",value=False)
 
-    apps = ["custom-accounts-django",
+    apps = ["custom_accounts_django",
             "multi_purpose_arduino_controller.controll_server.board_controller",
             "django_websocket_server",
             "column_switcher.django_app"
