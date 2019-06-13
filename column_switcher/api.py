@@ -30,6 +30,7 @@ class ColumnSwitcherAPI(ArduinoControllerAPI):
         self.start_time = time.time()
         self.runnning_program = []
         self.program = []
+        self._programm_last_positions={}
 
     def ws_get_motor_ports(self):
         for port in self._motors:
@@ -72,11 +73,13 @@ class ColumnSwitcherAPI(ArduinoControllerAPI):
     def ws_stop_program(self):
         self.running = False
         time.sleep(0.2)
+        self._programm_last_positions={}
         self.ws_get_running_program()
 
     def ws_run_program(self, program_profile, autostart=True):
         self.ws_stop_program()
         self.program=[]
+        self._programm_last_positions={}
         for port, runpoints in program_profile.items():
             motor = self._motors.get(port)
             for runpoint in runpoints:
@@ -98,11 +101,13 @@ class ColumnSwitcherAPI(ArduinoControllerAPI):
     def run_program(self):
         self.running = True
         self.datalogger.start_autosave(path=self.data_dir,savename=self.name+"_data")
+        self._programm_last_positions={}
         while self.running:
             deltat = time.time() - self.start_time
             to_run = [step for step in self.program if not step.done and step.time < deltat]
             for step in to_run:
                 self.set_position(port=step.motor['port'],position=step.position)
+                self._programm_last_positions={step.motor['port']:step.position}
                 step.done = True
 
             if len(to_run)>0:
@@ -110,6 +115,8 @@ class ColumnSwitcherAPI(ArduinoControllerAPI):
                 self.db_programm.profile = json.dumps(self.get_running_profile())
                 self.db_programm.save()
             time.sleep(0.05)
+            for port,position in self._programm_last_positions.items():
+                self.set_position(port=port,position=position)
 
             if not any([not step.done for step in self.program]):
                 self.running=False
