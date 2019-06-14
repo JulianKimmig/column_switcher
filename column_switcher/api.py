@@ -114,7 +114,7 @@ class ColumnSwitcherAPI(ArduinoControllerAPI):
                 self.ws_get_running_program()
                 self.db_programm.profile = json.dumps(self.get_running_profile())
                 self.db_programm.save()
-            time.sleep(0.05)
+            time.sleep(0.2)
             for port,position in self._programm_last_positions.items():
                 self.set_position(port=port,position=position)
 
